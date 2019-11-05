@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import red from './red.png'
 import blue from './blue.png'
 import blank from './blank.png'
 
 
-const Square = () => {
+const Square = (props) => {
 
-  handleClick = () => {
-    const {id, handleClick} = this.props
-    return handleClick(id);
+  const handleClick = () => {
+    const {id, handleClick} = props
+    let modId = id + 7;
+    let column = 0;
+    for(let i = 0; i < 7; i++){
+      column = i;
+      if((modId-i)%7 == 0){
+        break;
+      }
+    }
+    return handleClick(column);
   }
   return (
-      <div className = "square" onClick={this.handleClick}>
-        <img className = "face" src = {this.props.value==2 ? blue : this.props.value ==1 ? red : blank } alt = {blank}></img>
+      <div className = "square" onClick={handleClick}>
+        <img className = "face" src = {props.value==2 ? blue : props.value ==1 ? red : blank } alt = {blank}></img>
       </div>
   );
 }
