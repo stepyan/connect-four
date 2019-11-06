@@ -5,6 +5,18 @@ import blank from './blank.png'
 let animationRunning = false
 let animationColumn = -1
 
+const dropzoneStyle = (isPreview) => ({
+  width: `200px`,
+  height: `200px`,
+  backgroundColor: `#1DA1F2`,
+  backgroundImage: (isPreview) ? 'url(/path/to/image.jpg)' : 'none',
+});
+
+// @keyframes fade-in-keyframes {
+//   from {opacity: 0}
+//   to {opacity: 1}
+// }
+
 const Square = (props) => {
 
   const handleClick = () => {
@@ -91,8 +103,8 @@ const Square = (props) => {
   }
 
   return (
-      <div className = {getClass()} onClick={runAnimation} onMouseOver = {hoverOver} onAnimationEnd={handleClick}>
-        <img className = "face" src = {getPiece()} alt = {blank}></img>
+      <div className = {getClass()} onClick={runAnimation} onMouseOver = {hoverOver} onAnimationEnd={handleClick} >
+        <img className = "face" style={{width : '20%'}} src = {getPiece()} alt = {blank}></img>
       </div>
   );
 }
