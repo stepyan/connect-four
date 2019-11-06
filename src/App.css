@@ -53,6 +53,26 @@
   position: relative;
   /*opacity: .75;*/
 }
+
+.topSquare{
+  /*background-color: #ff0000;*/
+  /* color: #ffffff; */
+  text-align: center;
+  position: relative;
+  /*opacity: .75;*/
+}
+.animationSquare{
+  /*background-color: #ff0000;*/
+  /* color: #ffffff; */
+  text-align: center;
+  position: relative;
+  /*opacity: .75;*/
+  animation: fade-in-keyframes 0.5s;
+}
+@keyframes fade-in-keyframes {
+  from {opacity: 0}
+  to {opacity: 1}
+}
 /* .square:hover{
   color: #ffffff;
   opacity: 1;

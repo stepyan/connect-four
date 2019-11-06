@@ -5,7 +5,9 @@ let winConditions = []
 let userOnePlays = []
 let userTwoPlays = []
 let gameOver = false
-let userOneTurn = false
+let userOneTurn = true
+let emptyArray = Array(7).fill(0)
+let hoverColumn = -1
 
 const Board = () => {
 
@@ -16,14 +18,19 @@ const Board = () => {
     if(winConditions.length == 0){
       winConditions = wc.getAllWinConditions();
     }
-    
-    if(checkIfUserIsWinner(1)){
-      gameOver = true
-      alert("User One Wins!")
+    if(userOneTurn){
+      if(checkIfUserIsWinner(1)){
+        gameOver = true
+        hoverColumn = -1
+        alert("User One Wins!")
+      }
     }
-    else if(checkIfUserIsWinner(2)){
-      gameOver = true
-      alert("User Two Wins!")
+    else{
+      if(checkIfUserIsWinner(2)){
+        gameOver = true
+        hoverColumn = -1
+        alert("User Two Wins!")
+      }
     }
   }
 
@@ -66,13 +73,24 @@ const Board = () => {
         break;
       }
     }
-    let ap = allPlays
-    ap[index] = userOneTurn ? 1 : 2;
+    allPlays[index] = userOneTurn ? 1 : 2;
     checkIfWinner();
     if(!gameOver){
       userOneTurn = !userOneTurn
     }
-    setAllPlays(ap)
+    setAllPlays(allPlays)
+    setUpdated(!updated)
+  }
+
+  const runAnimation = () => {
+    setUpdated(!updated)
+  }
+
+  const hoverOver = (column) => {
+    if(gameOver){
+      return;
+    }
+    hoverColumn = column
     setUpdated(!updated)
   }
 
@@ -81,6 +99,7 @@ const Board = () => {
     userOnePlays = []
     userTwoPlays = []
     userOneTurn = true
+    hoverColumn = -1
     setAllPlays(Array(42).fill(0))
   }
 
@@ -89,9 +108,13 @@ const Board = () => {
       <h1 className = "glow">Connect Four</h1>
       <button onClick = {resetGame} className = "resetButton">Reset</button>
       <div className = "grid">
+        {emptyArray.map((element,i) =>{
+              return(
+                <Square key = {i.toString()} id = {i} value = {element} handleClick = {handleClick} topSquare = {true} hoverColumn = {gameOver ? -1 : hoverColumn} hoverOver = {hoverOver} userOneTurn = {userOneTurn} runAnimation = {runAnimation}/>)
+          })}
         {allPlays.map((element,i) =>{
             return(
-              <Square key = {i.toString()} id = {i} value = {element} handleClick = {handleClick}  />)
+              <Square key = {i.toString()} id = {i} value = {element} handleClick = {handleClick} topSquare = {false} hoverColumn = {gameOver ? -1 : hoverColumn} hoverOver = {hoverOver} userOneTurn = {userOneTurn} runAnimation = {runAnimation}/>)
           })}
       </div>
     </div>
