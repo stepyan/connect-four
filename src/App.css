@@ -1,3 +1,8 @@
+:root {
+  --finalTop: 0%;
+  --dropTime: 1.5s;
+}
+
 .App {
   text-align: center;
 }
@@ -24,7 +29,7 @@
 .backgroundStuff {
   height: 100vh;
   /*font: url("Game of Thrones.ttf") format("TrueType");*/
-  color: #ffffff;
+  color: white;
   margin: auto;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -67,11 +72,11 @@
   text-align: center;
   position: relative;
   /*opacity: .75;*/
-  animation: fade-in-keyframes 0.5s;
+  animation: nothing var(--dropTime) linear;
 }
-@keyframes fade-in-keyframes {
-  from {opacity: 0}
-  to {opacity: 1}
+@keyframes nothing {
+  from { top: 0%; }
+  to { top: var(--finalTop); }
 }
 /* .square:hover{
   color: #ffffff;
@@ -87,4 +92,40 @@
   width: 100%;
   position: absolute;
   align-self: center;
+}
+
+.animationFace {
+  max-width: 50px;
+  max-height: 50px;
+  /*margin-top: 50px;*/
+  display: block;
+  margin: auto;
+  width: 100%;
+  align-self: center;
+  position: absolute;
+  /* position: absolute; */
+}
+
+.tempFace{
+  max-width: 50px;
+  max-height: 50px;
+  /*margin-top: 50px;*/
+  margin: auto;
+  width: 100%;
+  position: relative;
+  left: 300%;
+}
+.tempFaceAnimation{
+  max-width: 50px;
+  max-height: 50px;
+  /*margin-top: 50px;*/
+  margin: auto;
+  width: 100%;
+  position: relative;
+  left: 300%;
+  -webkit-animation: slide 1s linear;
+}
+@-webkit-keyframes slide {
+  from { left: var(--initialLeft); }
+  to { left: 300%; }
 }

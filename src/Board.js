@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Square from "./Square.js";
 import wc from './WinningConditions.js';
+import red from './red.png'
+import blue from './blue.png'
+import blank from './blank.png'
 let winConditions = []
 let userOnePlays = []
 let userTwoPlays = []
@@ -8,7 +11,14 @@ let gameOver = false
 let userOneTurn = true
 let emptyArray = Array(7).fill(0)
 let hoverColumn = -1
-
+let animationRunning = false
+let baseSpeed = 1.25;
+const finalTop = {
+  "--finalTop": "500%"
+};
+const dropTime = {
+  "--dropTime": "1.5s"
+};
 const Board = () => {
 
   const [allPlays, setAllPlays] = useState(Array(42).fill(0))
@@ -54,6 +64,7 @@ const Board = () => {
   }
 
   const handleClick = (column) => {
+    animationRunning = false
     if(allPlays[column] != 0){
       return;
     }
@@ -82,7 +93,31 @@ const Board = () => {
     setUpdated(!updated)
   }
 
-  const runAnimation = () => {
+  const runAnimation = (column) => {
+    if(animationRunning){
+      return;
+    }
+    let percentage = "0%";
+    let time = "0s";
+    for(let i = 0; i < 6; i++){
+      let sqrDex = (5-i)*7 + column;
+      if(allPlays[sqrDex] === 0){
+        percentage = ((5-i) * 100 + 100).toString() + "%"
+        time = ((baseSpeed/6) * (6-i)).toString() + "s"
+        break;
+      }
+    }
+    Object.keys(finalTop).map(key => {
+      finalTop[key] = percentage
+      const value = finalTop[key];
+      document.documentElement.style.setProperty(key, value);
+    });
+    Object.keys(dropTime).map(key => {
+      dropTime[key] = time
+      const value = dropTime[key];
+      document.documentElement.style.setProperty(key, value);
+    });
+    animationRunning = true
     setUpdated(!updated)
   }
 
@@ -91,6 +126,9 @@ const Board = () => {
       return;
     }
     hoverColumn = column
+    if(animationRunning){
+      return;
+    }
     setUpdated(!updated)
   }
 
@@ -116,7 +154,9 @@ const Board = () => {
             return(
               <Square key = {i.toString()} id = {i} value = {element} handleClick = {handleClick} topSquare = {false} hoverColumn = {gameOver ? -1 : hoverColumn} hoverOver = {hoverOver} userOneTurn = {userOneTurn} runAnimation = {runAnimation}/>)
           })}
+          {true ? null : <img className = {animationRunning ? "tempFaceAnimation" : "tempFace"} src = {animationRunning ? red: blank} alt = {blank}></img>}
       </div>
+      
     </div>
   );
 }
