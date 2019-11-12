@@ -5,13 +5,6 @@ import blank from './blank.png'
 let animationRunning = false
 let animationColumn = -1
 
-// const dropzoneStyle = (isPreview) => ({
-//   width: `200px`,
-//   height: `200px`,
-//   backgroundColor: `#1DA1F2`,
-//   backgroundImage: (isPreview) ? 'url(/path/to/image.jpg)' : 'none',
-// });
-
 const Square = (props) => {
 
   const handleClick = () => {
@@ -40,7 +33,7 @@ const Square = (props) => {
     if(!props.topSquare){
       return "square"
     }
-    return animationRunning && props.id == animationColumn ? "animationSquare" : "hoverSquare"
+    return animationRunning && props.id == animationColumn ? "animationSquare" : ""
   }
 
   const hoverOver = () => {
@@ -79,13 +72,6 @@ const Square = (props) => {
   }
 
   const runAnimation = () => {
-    // Object.keys(darkTheme).map(key => {
-    //   const value = darkTheme[key];
-    //   document.documentElement.style.setProperty(key, value);
-    // });
-    // let domRect = Square.getBoundingClientRect();
-    // let { x, y } = domRect;
-    // console.log(x)
     animationRunning = true
     const {id, topSquare} = props
     if(topSquare){

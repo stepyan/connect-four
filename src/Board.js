@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import Square from "./Square.js";
 import wc from './WinningConditions.js';
-import red from './red.png'
-import blue from './blue.png'
-import blank from './blank.png'
 let winConditions = []
 let userOnePlays = []
 let userTwoPlays = []
@@ -13,6 +10,7 @@ let emptyArray = Array(7).fill(0)
 let hoverColumn = -1
 let animationRunning = false
 let baseSpeed = 1.25;
+let allPlays = Array(42).fill(0)
 const finalTop = {
   "--finalTop": "500%"
 };
@@ -21,7 +19,6 @@ const dropTime = {
 };
 const Board = () => {
 
-  const [allPlays, setAllPlays] = useState(Array(42).fill(0))
   const [updated, setUpdated] = useState(false)
   
   const checkIfWinner = () =>{
@@ -89,7 +86,6 @@ const Board = () => {
     if(!gameOver){
       userOneTurn = !userOneTurn
     }
-    setAllPlays(allPlays)
     setUpdated(!updated)
   }
 
@@ -138,7 +134,8 @@ const Board = () => {
     userTwoPlays = []
     userOneTurn = true
     hoverColumn = -1
-    setAllPlays(Array(42).fill(0))
+    allPlays = Array(42).fill(0)
+    setUpdated(!updated)
   }
 
   return (
@@ -154,7 +151,7 @@ const Board = () => {
             return(
               <Square key = {i.toString()} id = {i} value = {element} handleClick = {handleClick} topSquare = {false} hoverColumn = {gameOver ? -1 : hoverColumn} hoverOver = {hoverOver} userOneTurn = {userOneTurn} runAnimation = {runAnimation}/>)
           })}
-          {true ? null : <img className = {animationRunning ? "tempFaceAnimation" : "tempFace"} src = {animationRunning ? red: blank} alt = {blank}></img>}
+          
       </div>
       
     </div>
