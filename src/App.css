@@ -72,17 +72,12 @@
   text-align: center;
   position: relative;
   /*opacity: .75;*/
-  animation: nothing var(--dropTime) linear;
+  animation: drop var(--dropTime) linear;
 }
-@keyframes nothing {
+@keyframes drop {
   from { top: 0%; }
   to { top: var(--finalTop); }
 }
-/* .square:hover{
-  color: #ffffff;
-  opacity: 1;
-  transition: 1s;
-} */
 .face{
   max-width: 50px;
   max-height: 50px;
@@ -104,28 +99,4 @@
   align-self: center;
   position: absolute;
   /* position: absolute; */
-}
-
-.tempFace{
-  max-width: 50px;
-  max-height: 50px;
-  /*margin-top: 50px;*/
-  margin: auto;
-  width: 100%;
-  position: relative;
-  left: 300%;
-}
-.tempFaceAnimation{
-  max-width: 50px;
-  max-height: 50px;
-  /*margin-top: 50px;*/
-  margin: auto;
-  width: 100%;
-  position: relative;
-  left: 300%;
-  -webkit-animation: slide 1s linear;
-}
-@-webkit-keyframes slide {
-  from { left: var(--initialLeft); }
-  to { left: 300%; }
 }
